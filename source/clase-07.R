@@ -114,6 +114,20 @@ fish_wide %>% pivot_longer(cols = c(2:12), names_to = "seen")
 
 ## **[3.] Aplicación: GEIH**
 
+## Problem set 1
+
+# importar datos
+cg = import("input/Enero - Cabecera - Caracteristicas generales (Personas).csv")%>% clean_names()
+ocu = import("input/Enero - Cabecera - Ocupados.csv") %>% clean_names()
+
+# verificar si variables están duplicadas
+cg$duplicado = duplicated(cg$directorio)
+table(cg$duplicado) 
+a = distinct_all(cg)
+b = distinct_all(select(.data = cg , directorio, secuencia_p, orden))
+
+
+cg_ocu = left_join(x=cg, y=ocu, by=c("directorio", "secuencia_p", "orden"))
 
 
 
